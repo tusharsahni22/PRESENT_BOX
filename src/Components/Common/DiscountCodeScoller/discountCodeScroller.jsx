@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-export const DISCOUNT_SCROLLER = ['GRAB 20% EXTRA OFF: USE CODE FLAT20  T&C Apply',"FREE SHIPPING ON ORDERS ABOVE RS. 500"];
 
+const DISCOUNT_SCROLLER = ['GRAB 20% EXTRA OFF: USE CODE FLAT20  T&C Apply',"FREE SHIPPING ON ORDERS ABOVE RS. 500"];
 
 const DiscountCodeContainer = styled.div`
 display: flex;
@@ -23,7 +23,7 @@ const DiscountCodeScroller = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [DISCOUNT_SCROLLER.length, currentIndex]);
+  }, []);
 
   return (
     <DiscountCodeContainer >

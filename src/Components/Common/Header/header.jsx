@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { APP_NAME } from '../../../Utils/ApplicationConstant';
 import DiscountScroller from '../DiscountCodeScoller/discountCodeScroller';
 import Sidebar from '../Sidebar';
+import Login from '../../Auth';
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -52,12 +54,15 @@ const Icon = styled.img`
 `;
 
 function Header() {
+  const navigate = useNavigate();
   const [togleSideBar, setToggleSideBar] = useState(false);
+  const [toggleLogin, setToggleLogin] = useState(false);
   const [isSearchActive, setIsSearchActive] = useState(false);
 
   return (
     <>
       {togleSideBar && <Sidebar />}
+      {toggleLogin && <Login toggleLogin={setToggleLogin} />}
       <DiscountScroller />
       <HeaderContainer>
         {isSearchActive ? 
@@ -72,10 +77,10 @@ function Header() {
               <Icon src='./Search.svg' alt="Search" onClick={() => setIsSearchActive(true)} />
             </HeaderLeft>
             <HeaderCenter>
-              <BrandName>{APP_NAME}</BrandName>
+              <BrandName onClick={()=>{navigate("/")}}>{APP_NAME}</BrandName>
             </HeaderCenter>
             <HeaderRight>
-              <Icon src='./User.svg' alt="User" />
+              <Icon src='./User.svg' alt="User" onClick={()=>{setToggleLogin(true)}}/>
               <Icon src='./ShoppingBag.svg' alt="Bag" />
             </HeaderRight>
           </>

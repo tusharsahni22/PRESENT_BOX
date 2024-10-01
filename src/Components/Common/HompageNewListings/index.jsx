@@ -8,6 +8,8 @@ const Wrapper = styled.div`
 
 
 function Index({title, ...props}) {
+  if(props.loading) return <h1>Loading...</h1>
+  if(props.error) return <h1>Error...</h1>
   return (
     <Wrapper>
       <HomePageNewListing title={title} props={props}/></Wrapper>

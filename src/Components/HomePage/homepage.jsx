@@ -1,23 +1,14 @@
-import React,{useEffect,useState} from 'react'
 import ItemListing from '../Common/HompageNewListings'
-import axios from 'axios'
+import useFetchWithCache from '../Common/CustomQuery/useFetchWithCache';
 
 function Homepage() {
-  const [products, setProducts] = useState([]);
-    useEffect(() => {
-      axios.get("https://fakestoreapi.com/products").then((response) => {
-        response.data.forEach((item) => {
-          item.offerPrice = (item.price-10) ;
-        });
-        setProducts(response.data);
-      });
-    }, []);
+
+    const {data,isLoading,error} = useFetchWithCache("https://fakestoreapi.com/products");
 
   return (
     <div>
-      <ItemListing title="New Listings" products={products}/>
-      <ItemListing title="Trendinf"/>
-
+      <ItemListing title="New Listings" products={data} loading={isLoading} error={error}/>
+      <ItemListing title="Trending"/>
     </div>
   )
 }

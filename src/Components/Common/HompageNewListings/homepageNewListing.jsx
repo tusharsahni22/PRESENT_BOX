@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const ShowcaseContainer = styled.div`
@@ -87,6 +88,7 @@ const Sale = styled.div`
 
 
 const HomepageNewListing = ({ title , props }) => {
+  const navigate = useNavigate();
   const [Items, setItems] = useState([]);
   useEffect(() => {
     setItems(props.products);
@@ -112,7 +114,7 @@ const HomepageNewListing = ({ title , props }) => {
           </ProductCard>
         ))}
       </ProductGrid>
-      <Div>View All</Div>
+      <Div onClick={() => navigate("/products", { state: { title: title } })}>View All</Div>
     </ShowcaseContainer>
   );
 };
